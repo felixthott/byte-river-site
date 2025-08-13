@@ -1,5 +1,7 @@
 import { createClient } from '@sanity/client'
 
+// Use NEXT_PUBLIC_* for anything that might run in the browser.
+// Fall back to server-only names if used in server components.
 const projectId =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || process.env.SANITY_PROJECT_ID
 const dataset =
@@ -14,6 +16,6 @@ export const client = createClient({
   dataset,
   apiVersion: '2025-07-01',
   useCdn: true,
-  token: process.env.SANITY_API_READ_TOKEN || undefined,
+  token: process.env.SANITY_API_READ_TOKEN || undefined, // only used server-side
   perspective: 'published',
 })
